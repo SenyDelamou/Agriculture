@@ -15,6 +15,8 @@ function HomePage() {
   const [farms, setFarms] = useState(40);
   const [participants, setParticipants] = useState(120);
 
+  const formattedParticipants = participants; // Quick fix for display
+
   const reachMetrics = useMemo(() => {
     const beneficiaries = Math.round(participants * 3.2);
     const skillHours = Math.round(participants * 12.5);

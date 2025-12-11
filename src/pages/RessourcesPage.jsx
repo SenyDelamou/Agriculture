@@ -1,66 +1,77 @@
 function RessourcesPage() {
   return (
     <>
-      <section className="banner reveal">
-        <h1>Plateforme de ressources agroécologiques</h1>
-        <p>Guides pratiques, outils méthodologiques et contenus pédagogiques pour accompagner vos projets.</p>
+      <section className="hero reveal">
+        <h1>La bibliothèque des savoirs</h1>
+        <p>Guides pratiques, modèles économiques et fiches techniques pour réussir votre transition.</p>
+        <div className="cta-group">
+          <button className="btn btn-primary">Parcourir les thèmes</button>
+          <button className="btn btn-outline">Derniers ajouts</button>
+        </div>
       </section>
 
       <section className="section reveal">
-        <p className="section-title">Guides stratégiques</p>
-        <h2>Comprendre et planifier la transition</h2>
+        <div className="section-title">Guides Stratégiques</div>
+        <h2>Comprendre et planifier</h2>
         <div className="grid">
           <article className="card">
-            <h3>Feuille de route carbone</h3>
-            <p>Un cadre en 8 étapes pour mesurer, réduire et compenser les émissions agricoles.</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌍</div>
+            <h3>Carbone & Climat</h3>
+            <p>Mesurer, réduire et compenser vos émissions grâce à notre feuille de route en 8 étapes.</p>
+            <button className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Télécharger le PDF</button>
           </article>
           <article className="card">
-            <h3>Guide de l'agroforesterie</h3>
-            <p>Schémas d'implantation, choix des essences et retours d'expérience terrain.</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌳</div>
+            <h3>Agroforesterie</h3>
+            <p>Implantation de haies, choix des essences et modèles économiques pour rentabiliser vos arbres.</p>
+            <button className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Voir le guide</button>
           </article>
           <article className="card">
-            <h3>Boîte à outils agroécologie</h3>
-            <p>Recueil d'outils pour gérer les sols, l'eau et la biodiversité dans les exploitations.</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💧</div>
+            <h3>Hydrologie Régénérative</h3>
+            <p>Techniques de keyline design et de stockage de l'eau dans les sols pour résister aux sécheresses.</p>
+            <button className="btn btn-outline" style={{ marginTop: '1.5rem', width: '100%' }}>Lire l'article</button>
           </article>
         </div>
       </section>
 
       <section className="section highlight reveal">
         <div>
-          <h3>Ressources multimédias</h3>
-          <p>Entretiens, webinaires, ateliers et vidéos techniques animés par les membres du collectif et nos partenaires.</p>
+          <h3>Ressources Multimédias</h3>
+          <p>Plongez au cœur des fermes innovantes grâce à notre vidéothèque exclusive.</p>
+          <div className="partners">
+            <span className="partner-tag">Webinaires (Replay)</span>
+            <span className="partner-tag">Podcasts</span>
+            <span className="partner-tag">Tutos Vidéo</span>
+          </div>
         </div>
-        <div className="columns">
-          <article className="card">
-            <h3>Webinaires mensuels</h3>
-            <p>Sessions d'une heure pour partager des cas pratiques et répondre aux questions des agriculteurs.</p>
-          </article>
-          <article className="card">
-            <h3>Bibliothèque vidéo</h3>
-            <p>Courtes capsules de terrain démontrant les techniques régénératives et les retours sur investissement.</p>
-          </article>
-          <article className="card">
-            <h3>Newsletter scientifique</h3>
-            <p>Veille mensuelle des publications, innovations et tendances sur l'agriculture régénératrice.</p>
-          </article>
+        <div className="grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+          <div className="card" style={{ background: 'rgba(255,255,255,0.1)', border: 'none' }}>
+            <h4 style={{ color: 'white', marginBottom: '0.5rem' }}>Webinaires Mensuels</h4>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Chaque premier mardi du mois, un expert décrypte une thématique.</p>
+          </div>
+          <div className="card" style={{ background: 'rgba(255,255,255,0.1)', border: 'none' }}>
+            <h4 style={{ color: 'white', marginBottom: '0.5rem' }}>Masterclass</h4>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>Des cours approfondis de 2h sur des sujets techniques pointus.</p>
+          </div>
         </div>
       </section>
 
       <section className="section reveal">
-        <p className="section-title">Partage et apprentissage</p>
-        <h2>Rejoindre la communauté Terres d'Avenir</h2>
+        <div className="section-title">Open Source</div>
+        <h2>Outils partagés par la communauté</h2>
         <div className="grid">
           <article className="card">
-            <h3>Forum d'entraide</h3>
-            <p>Espace d'échange entre agriculteurs, conseillers et chercheurs pour résoudre les défis du quotidien.</p>
+            <h3>🛠️ Boîte à outils</h3>
+            <p>Tableaux Excel de suivi de trésorerie, plans de bâtiments et contrats types.</p>
           </article>
           <article className="card">
-            <h3>Lab ouvert</h3>
-            <p>Accès à des prototypes, formations croisées et ressources open source développées avec nos partenaires.</p>
+            <h3>🧪 Lab Low-Tech</h3>
+            <p>Plans de construction pour outils autoconstruits (séchoirs, semoirs...).</p>
           </article>
           <article className="card">
-            <h3>Bibliothèque partagée</h3>
-            <p>Collection collaborative de documents, études de cas et fiches pratiques disponibles en téléchargement.</p>
+            <h3>📊 Données Ouvertes</h3>
+            <p>Base de données de rendements comparés en bio vs conventionnel.</p>
           </article>
         </div>
       </section>
