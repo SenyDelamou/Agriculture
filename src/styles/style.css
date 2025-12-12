@@ -332,25 +332,51 @@ header {
         display: flex;
     }
 
-    .nav-links {
+    .navbar {
+        padding: 0 1.25rem;
+    }
+
+    .navbar-actions {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
+        inset: 0;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
-        transform: translateY(-100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 3rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-16px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
         z-index: 1000;
     }
 
-    .nav-links.open {
+    .navbar-actions.visible {
+        opacity: 1;
+        pointer-events: auto;
         transform: translateY(0);
+    }
+
+    .nav-pill {
+        width: 100%;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .nav-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        align-items: center;
     }
 
     .nav-links a.nav-link {
@@ -379,6 +405,12 @@ header {
     .auth-side {
         display: none !important;
     }
+
+    .notification-panel {
+        position: static;
+        width: min(320px, 90vw);
+        max-height: 60vh;
+    }
 }
 
 .navbar-actions {
@@ -389,6 +421,157 @@ header {
 
 .nav-pill {
     display: flex;
+}
+
+.notification-bell {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.bell-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: rgba(15, 23, 42, 0.04);
+    color: var(--color-secondary);
+    transition: all 0.2s ease;
+}
+
+.bell-button:hover,
+.bell-button:focus-visible {
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow: var(--shadow-sm);
+    outline: none;
+}
+
+.badge-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    padding: 0 4px;
+}
+
+.notification-panel {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;
+    width: 320px;
+    padding: 1.25rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    z-index: 1200;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.panel-header h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.panel-body {
+    display: grid;
+    gap: 0.85rem;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    border-radius: var(--radius-md);
+    padding: 0.85rem;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    background: rgba(248, 250, 252, 0.6);
+    display: grid;
+    gap: 0.35rem;
+}
+
+.notification-item.read {
+    opacity: 0.75;
+}
+
+.notification-item header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+.notification-item h5 {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.notification-item time {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+}
+
+.notification-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.empty-state {
+    margin: 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: var(--color-primary-bg);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.badge.small {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.45rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-link:hover,
+.btn-link:focus-visible {
+    text-decoration: underline;
+    outline: none;
 }
 
 /* Home Page Specifics */
@@ -582,42 +765,8 @@ footer {
         gap: 2rem;
     }
 
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .menu-toggle {
-        display: flex;
-        /* Simplified for now */
-        flex-direction: column;
-        gap: 6px;
-        width: 32px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .menu-toggle span {
-        height: 2px;
-        background-color: var(--color-secondary);
-        width: 100%;
-    }
-
-    .nav-links {
-        display: none;
-        /* Simple hiding for now */
-    }
-
-    .navbar-actions {
-        display: none;
-    }
-
     .auth-container {
         grid-template-columns: 1fr !important;
-    }
-
-    .auth-side {
-        display: none !important;
     }
 }
 
