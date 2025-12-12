@@ -11,6 +11,9 @@ import ContactPage from './pages/ContactPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
+import ProgrammesPage from './pages/ProgrammesPage.jsx';
+import VisionPage from './pages/VisionPage.jsx';
+import ProjetsPage from './pages/ProjetsPage.jsx';
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="marche" element={<MarchePage />} />
         <Route path="investisseurs" element={<InvestisseursPage />} />
         <Route path="ressources" element={<RessourcesPage />} />
+        <Route path="programmes" element={<ProgrammesPage />} />
+        <Route path="vision" element={<VisionPage />} />
+        <Route path="projets" element={<ProjetsPage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
       <Route path="connexion" element={<LoginPage />} />

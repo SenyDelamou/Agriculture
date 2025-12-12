@@ -9,6 +9,14 @@ function Layout() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const handleNavToggle = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
+  const handleNavLinkClick = () => {
+    setMenuOpen(false);
+  };
+
   const navLinks = useMemo(
     () => [
       { to: '/', label: t('nav.home'), end: true },
@@ -78,22 +86,24 @@ function Layout() {
           <button
             type="button"
             className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen((prev) => !prev)}
+            onClick={handleNavToggle}
+            aria-controls="main-navigation"
             aria-expanded={menuOpen}
-            aria-label="Ouvrir le menu"
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             <span />
             <span />
             <span />
           </button>
-          <div className={`navbar-actions ${menuOpen ? 'visible' : ''}`}>
+          <div className={`navbar-actions ${menuOpen ? 'visible' : ''}`} id="main-navigation">
             <div className="nav-pill">
-              <ul className="nav-links">
+              <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
                 {navLinks.map(({ to, label, end, cta }) => (
                   <li key={to}>
                     <NavLink
                       to={to}
                       end={end}
+                      onClick={handleNavLinkClick}
                       className={({ isActive }) =>
                         ['nav-link', cta ? 'cta-link' : '', isActive ? 'active' : ''].filter(Boolean).join(' ')
                       }

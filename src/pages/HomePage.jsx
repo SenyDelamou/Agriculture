@@ -11,6 +11,32 @@ function HomePage() {
   const testimonials = t('home.testimonials');
   const reach = t('home.reach');
 
+  const featuresCards = useMemo(() => {
+    if (!features) {
+      return [];
+    }
+
+    if (Array.isArray(features.cards) && features.cards.length > 0) {
+      return features.cards.map((card, index) => ({
+        id: card.id ?? index,
+        title: card.title ?? card.heading ?? '',
+        description: card.description ?? card.desc ?? '',
+      }));
+    }
+
+    const legacyCards = [features.diagnostic, features.fiches_leviers, features.choix_cultures].filter(Boolean);
+
+    return legacyCards.map((card, index) => ({
+      id: card.id ?? index,
+      title: card.title ?? card.heading ?? '',
+      description: card.description ?? card.desc ?? '',
+    }));
+  }, [features]);
+
+  const fallbackCards = Array.isArray(ecosystem?.cards) ? ecosystem.cards : [];
+  const displayedCards = featuresCards.length > 0 ? featuresCards : fallbackCards;
+  const highlightDescription = highlight?.description ?? highlight?.desc ?? '';
+
   const [hectares, setHectares] = useState(25);
   const [farms, setFarms] = useState(40);
   const [participants, setParticipants] = useState(120);
@@ -56,55 +82,94 @@ function HomePage() {
             {hero.secondaryCta}
           </Link>
         </div>
-      </section>
 
-      <section className="section reveal">
-        <p className="section-title">{ecosystem.title}</p>
-        <h2>{ecosystem.headline}</h2>
-        <div className="grid">
-          {ecosystem.cards.map(({ title, description }) => (
-            <article className="card" key={title}>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section reveal">
-        <p className="section-title">{features.title}</p>
-        <h2>{features.headline}</h2>
-        <div className="grid">
-          {features.cards.map(({ title, description }) => (
-            <article className="card" key={title}>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section reveal">
-        <div className="highlight">
-          <div>
-            <h3>{highlight.title}</h3>
-            <p>{highlight.description}</p>
-            <div className="partners">
-              {highlight.tags.map((tag) => (
-                <span className="partner-tag" key={tag}>
-                  {tag}
-                </span>
-              ))}
+        {/* Flagship Dashboard Visual - CSS Only Mockup */}
+        <div style={{ marginTop: '4rem', padding: '1rem', background: 'rgba(255,255,255,0.4)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)' }}>
+          <div style={{ background: '#0f172a', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', position: 'relative', border: '1px solid #1e293b' }}>
+            {/* Mockup Header */}
+            <div style={{ height: '40px', borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', padding: '0 1rem', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b' }}></div>
+                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }}></div>
+              </div>
+              <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Tableau de bord - Ferme des Lilas</div>
+            </div>
+            {/* Mockup Body Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', height: 'calc(100% - 40px)' }}>
+              {/* Sidebar */}
+              <div style={{ borderRight: '1px solid #1e293b', padding: '1rem' }}>
+                <div style={{ height: '8px', width: '60%', background: '#334155', borderRadius: '4px', marginBottom: '1.5rem' }}></div>
+                <div style={{ height: '8px', width: '80%', background: '#1e293b', borderRadius: '4px', marginBottom: '0.8rem' }}></div>
+                <div style={{ height: '8px', width: '80%', background: '#1e293b', borderRadius: '4px', marginBottom: '0.8rem' }}></div>
+                <div style={{ height: '8px', width: '80%', background: '#1e293b', borderRadius: '4px', marginBottom: '0.8rem' }}></div>
+              </div>
+              {/* Content */}
+              <div style={{ padding: '1.5rem', display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '1.5rem' }}>
+                <div style={{ background: '#1e293b', borderRadius: '8px', padding: '1rem', border: '1px solid #334155' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem' }}>Santé des sols</div>
+                  <div style={{ fontSize: '1.5rem', color: '#10b981', fontWeight: 'bold' }}>Optimal</div>
+                  <div style={{ marginTop: '1rem', height: '40px', display: 'flex', alignItems: 'flex-end', gap: '4px' }}>
+                    <div style={{ width: '20%', height: '40%', background: '#059669', borderRadius: '2px' }}></div>
+                    <div style={{ width: '20%', height: '60%', background: '#059669', borderRadius: '2px' }}></div>
+                    <div style={{ width: '20%', height: '80%', background: '#059669', borderRadius: '2px' }}></div>
+                    <div style={{ width: '20%', height: '50%', background: '#059669', borderRadius: '2px' }}></div>
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  <div style={{ background: '#1e293b', borderRadius: '8px', padding: '1rem', border: '1px solid #334155' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem' }}>Météo (7j)</div>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                      <span style={{ fontSize: '1.5rem' }}>☀️</span>
+                      <div>
+                        <div style={{ fontSize: '0.9rem', color: 'white' }}>24°C</div>
+                        <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Pas de pluie</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ background: '#1e293b', borderRadius: '8px', padding: '1rem', border: '1px solid #334155' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem' }}>Alertes</div>
+                    <div style={{ fontSize: '0.8rem', color: '#f59e0b', display: 'flex', gap: '0.5rem' }}>
+                      <span>⚠️</span> Risque mildiou modéré
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="metrics">
-            {highlight.metrics.map(({ value, label }) => (
-              <div className="metric" key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
+        </div>
+      </section>
+
+      <section className="section reveal">
+        <div className="section-title">{ecosystem?.title ?? features?.title}</div>
+        <h2>{features?.headline ?? features?.title ?? ecosystem?.headline}</h2>
+        <div className="grid">
+          {displayedCards.map((card) => (
+            <article className="card" key={card.id ?? card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section highlight reveal">
+        <div>
+          <h3>{highlight.title}</h3>
+          <p>{highlightDescription}</p>
+          <div className="partners">
+            <span className="partner-tag">INRAE</span>
+            <span className="partner-tag">Chambres d'Agriculture</span>
+            <span className="partner-tag">La French Tech</span>
           </div>
+        </div>
+        <div className="metrics">
+          {highlight.metrics.map(({ value, label }) => (
+            <div className="metric" key={label}>
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
